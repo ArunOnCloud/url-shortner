@@ -1,6 +1,8 @@
 package com.akr.business.url.shortner.redirection.controller;
 
+import com.akr.business.url.shortner.redirection.service.RedirectionService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,18 +17,19 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/")
 public class RedirectController {
 
+    @Autowired
+    RedirectionService redirectionService;
 
     @GetMapping("health")
     public ResponseEntity<String> health(){
         return new ResponseEntity<String>("OK", HttpStatus.OK);
-
     }
+
+
 
     @GetMapping("r/{id}")
     public RedirectView redirect(RedirectAttributes attributes,@PathVariable String id){
-       // attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
-       // attributes.addAttribute("attribute", "redirectWithRedirectView");
-        String url = "https://www.google.com/";
+        String url = redirectionService.getRedirectUrl(id);
         log.info("redirecting key {} to url {}",id,url);
         return new RedirectView(url);
 

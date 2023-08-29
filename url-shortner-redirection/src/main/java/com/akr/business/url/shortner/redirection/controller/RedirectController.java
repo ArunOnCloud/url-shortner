@@ -28,7 +28,7 @@ public class RedirectController {
 
 
     @GetMapping("r/{id}")
-    public RedirectView redirect(RedirectAttributes attributes,@PathVariable String id){
+    public RedirectView redirect(RedirectAttributes attributes,@PathVariable String id) {
         String url = redirectionService.getRedirectUrl(id);
         log.info("redirecting key {} to url {}",id,url);
         return new RedirectView(url);

@@ -25,7 +25,7 @@ public class UrlCreatorController {
 
     }
 
-    @PostMapping("/create")
+    @PostMapping("create")
     public ResponseEntity<UrlCreatorResponseDto> createShortUrl(@RequestBody CreateShortUrlDto createShortUrlDto){
         String shortUrl = urlCreatorService.shortUrl(createShortUrlDto.getUrl());
         UrlCreatorResponseDto urlCreatorResponseDto = new UrlCreatorResponseDto();
